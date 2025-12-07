@@ -10,5 +10,19 @@ pipeline {
         '''
       }
     }
+    stage("Deploy") {
+      steps {
+        sh ''' 
+          docker run -d --name cont2 hello
+        '''
+      }
+    }
+    stage("Cleanup") {
+      steps {
+        sh ''' 
+          docker rm -f cont2
+        '''
+      }
+    }
   }
 }
